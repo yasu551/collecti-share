@@ -7,6 +7,8 @@
       %ul.navbar-nav
         - if current_user.present?
           %li.nav-item
+            = link_to "アイテム", items_path, class: "nav-link"
+          %li.nav-item
             = link_to "マイページ", user_user_profile_path, class: "nav-link"
           %li.nav-item
             = link_to "マイアイテム", user_items_path, class: "nav-link"

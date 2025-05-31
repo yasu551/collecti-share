@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/auth/failure", to: "sessions#failure"
   post "/logout", to: "sessions#destroy", as: :logout
 
+  resources :items, only: %i[index]
+
   namespace :user do
     resource :user_profile, only: %i[show new create edit update]
     resources :items, only: %i[index show new create edit update]

@@ -2,7 +2,7 @@ class ItemVersion < ApplicationRecord
   extend Enumerize
 
   enumerize :condition, in: %i[acceptable good very_good like_new]
-  enumerize :availability_status, in: %i[unavailable available]
+  enumerize :availability_status, in: %i[unavailable available], predicates: true
 
   belongs_to :item
 

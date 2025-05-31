@@ -8,6 +8,13 @@ class Item < ApplicationRecord
 
   scope :latest, -> { order(created_at: :desc) }
 
+  class << self
+    def available
+      item_ids = all.filter_map { _1.id if _1.current_item_version&.available? }
+      where(id: item_ids)
+    end
+  end
+
   def build_from_current_item_version
     item_versions.build(name:, description:, condition:, daily_price:, availability_status:)
   end

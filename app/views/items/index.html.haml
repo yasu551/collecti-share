@@ -1,0 +1,7 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    %h1.fs-2.text-center.my-4 アイテム一覧
+    %ul.list-group
+      - @items.each do |item|
+        %li.list-group-item
+          = item.name
