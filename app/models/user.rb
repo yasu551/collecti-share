@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_one :user_profile, dependent: :destroy
+  has_many :user_profile_versions, through: :user_profile, class_name: "UserProfileVersion"
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :google_uid, presence: true, uniqueness: true
