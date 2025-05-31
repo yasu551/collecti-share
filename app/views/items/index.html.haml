@@ -8,4 +8,4 @@
     %ul.list-group
       - @items.each do |item|
         %li.list-group-item
-          = item.name
+          = link_to item.name, item_path(item)

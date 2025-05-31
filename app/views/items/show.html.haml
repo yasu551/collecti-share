@@ -1,0 +1,12 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    %h1.fs-2.text-center.my-4= @item.name
+    .vstack.gap-3
+      - %i[description condition daily_price availability_status].each do |attribute|
+        %hr
+        .row
+          .col-3
+            %h6.mb-0= Item.human_attribute_name(attribute)
+          .col-9.text-secondary
+            = @item.public_send(attribute)
+      %hr
