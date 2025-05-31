@@ -36,3 +36,13 @@ ja:
       item:
         <<: *item_version
 
+  enumerize:
+    item_version:
+      condition:
+        acceptable: 可
+        good: 良い
+        very_good: 非常に良い
+        like_new: ほぼ新品
+      availability_status:
+        available: 利用可能
+        unavailable: 利用不可

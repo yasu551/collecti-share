@@ -27,6 +27,7 @@ class User::ItemsController < ApplicationController
   end
 
   def update
+    @item = current_user.items.find(edit_item_params[:item_id])
     @item_version = @item.item_versions.build(edit_item_params)
     if @item_version.save
       redirect_to user_item_path(@item), notice: "アイテムを更新しました"
@@ -41,15 +42,11 @@ class User::ItemsController < ApplicationController
       @item = current_user.items.find(params[:id])
     end
 
-    def item_version_keys
-      %i[name description condition daily_price availability_status]
-    end
-
     def new_item_params
-      params.expect(item: { item_versions_attributes: [ item_version_keys ] })
+      params.expect(item: { item_versions_attributes: [ %i[name description condition daily_price availability_status] ] })
     end
 
     def edit_item_params
-      params.expect(item_version: item_version_keys)
+      params.expect(item_version: %i[item_id name description condition daily_price availability_status])
     end
 end
