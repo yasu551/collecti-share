@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   post "/logout", to: "sessions#destroy", as: :logout
 
   namespace :user do
-    resource :user_profile, only: %i[show new create edit update destroy]
+    resource :user_profile, only: %i[show new create edit update]
+    resources :items, only: %i[index show new create edit update]
   end
 
 

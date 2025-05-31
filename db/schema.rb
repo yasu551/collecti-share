@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_132000) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_31_132313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "item_versions", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.string "name", null: false
+    t.text "description", default: "", null: false
+    t.string "condition", default: "good", null: false
+    t.integer "daily_price", default: 1000, null: false
+    t.string "availability_status", default: "unavailable", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_versions_on_item_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -47,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_132000) do
     t.index ["google_uid"], name: "index_users_on_google_uid", unique: true
   end
 
+  add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
   add_foreign_key "user_profile_versions", "user_profiles"
   add_foreign_key "user_profiles", "users"

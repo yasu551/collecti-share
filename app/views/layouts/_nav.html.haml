@@ -9,6 +9,8 @@
           %li.nav-item
             = link_to "マイページ", user_user_profile_path, class: "nav-link"
           %li.nav-item
+            = link_to "マイアイテム", user_items_path, class: "nav-link"
+          %li.nav-item
             = button_to 'ログアウト', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-danger'
         - else
           %li.nav-item

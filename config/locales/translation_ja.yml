@@ -4,6 +4,7 @@ ja:
       user: ユーザー  #g
       user_profile: ユーザープロファイル  #g
       user_profile_version: ユーザープロファイルバージョン  #g
+      item: アイテム
 
     attributes:
       user_profile_version: &user_profile_version
@@ -17,7 +18,6 @@ ja:
         user_profile_versions: ユーザープロファイルバージョン  #g
         <<: *user_profile_version
 
-
       user:
         email: メール  #g
         google_uid: Google UID  #g
@@ -25,4 +25,14 @@ ja:
         user_profile: :activerecord.models.user_profile  #g
         user_profile_versions: ユーザープロファイルバージョン  #g
         <<: *user_profile
+
+      item_version: &item_version
+        name: 名前
+        description: 説明
+        condition: 状態
+        daily_price: 日次価格
+        availability_status: 利用可能ステータス
+
+      item:
+        <<: *item_version
 
