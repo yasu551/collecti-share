@@ -18,6 +18,7 @@ gem "thruster", require: false
 gem "haml-rails"
 gem "enumerize"
 gem "simple_form"
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
