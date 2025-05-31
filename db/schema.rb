@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_113932) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_31_132000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
 
   create_table "user_profile_versions", force: :cascade do |t|
     t.bigint "user_profile_id", null: false
@@ -40,6 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_113932) do
     t.index ["google_uid"], name: "index_users_on_google_uid", unique: true
   end
 
+  add_foreign_key "items", "users"
   add_foreign_key "user_profile_versions", "user_profiles"
   add_foreign_key "user_profiles", "users"
 end
