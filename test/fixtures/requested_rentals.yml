@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rental_transaction: one
+  requested_at: 2025-06-01 01:10:17
+
+two:
+  rental_transaction: two
+  requested_at: 2025-06-01 01:10:17

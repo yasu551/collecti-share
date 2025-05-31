@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_132313) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_31_161017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,6 +31,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_132313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "rental_transactions", force: :cascade do |t|
+    t.bigint "lender_id", null: false
+    t.bigint "borrower_id", null: false
+    t.bigint "item_version_id", null: false
+    t.date "starts_on", null: false
+    t.date "ends_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["borrower_id", "item_version_id"], name: "index_rental_transactions_on_borrower_id_and_item_version_id", unique: true
+    t.index ["item_version_id"], name: "index_rental_transactions_on_item_version_id"
+    t.index ["lender_id"], name: "index_rental_transactions_on_lender_id"
+  end
+
+  create_table "requested_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "requested_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_requested_rentals_on_rental_transaction_id", unique: true
   end
 
   create_table "user_profile_versions", force: :cascade do |t|
@@ -61,6 +82,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_31_132313) do
 
   add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "rental_transactions", "item_versions"
+  add_foreign_key "rental_transactions", "users", column: "borrower_id"
+  add_foreign_key "rental_transactions", "users", column: "lender_id"
+  add_foreign_key "requested_rentals", "rental_transactions"
   add_foreign_key "user_profile_versions", "user_profiles"
   add_foreign_key "user_profiles", "users"
 end
