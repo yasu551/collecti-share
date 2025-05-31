@@ -6,10 +6,16 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :google_uid, presence: true, uniqueness: true
 
+  delegate :address, :phone_number, to: :user_profile, allow_nil: true
+
   class << self
     def find_or_create_from_auth_hash(auth_hash)
-      where(email: auth_hash[:info][:email], google_uid: auth_hash[:uid]).first_or_create do |user|
-        user.name = auth_hash[:info][:name]
+      transaction do
+        user =
+          where(email: auth_hash[:info][:email], google_uid: auth_hash[:uid]).first_or_create! do |u|
+            u.name = auth_hash[:info][:name]
+          end
+        user.create_user_profile!
       end
     end
   end

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: %i[create failure]
 
   def create
     user = User.find_or_create_from_auth_hash(request.env["omniauth.auth"])

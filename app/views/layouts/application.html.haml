@@ -17,3 +17,5 @@
   %body
     = render 'layouts/nav'
     = yield
+    - if Rails.env.local?
+      = render "layouts/rails-template-inspector"

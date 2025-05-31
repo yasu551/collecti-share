@@ -5,8 +5,11 @@
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#navbar-nav
       %ul.navbar-nav
-        %li.nav-item
-          - if current_user.present?
+        - if current_user.present?
+          %li.nav-item
+            = link_to "マイページ", user_profile_path, class: "nav-link"
+          %li.nav-item
             = button_to 'ログアウト', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-danger'
-          - else
+        - else
+          %li.nav-item
             = button_to 'ログイン', login_path, method: :post, data: { turbo: false }, class: 'btn btn-info'

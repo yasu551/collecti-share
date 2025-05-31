@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/auth/failure", to: "sessions#failure"
   post "/logout", to: "sessions#destroy", as: :logout
 
+  resource :user_profile, only: %i[show new create edit update destroy]
+
   root "home#index"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

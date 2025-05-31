@@ -1,0 +1,14 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    %h1.fs-2.text-center.my-4 マイページ
+    .mb-2
+      = link_to '編集', edit_user_profile_path, class: 'btn btn-primary'
+    .vstack.gap-3
+      - %i[name email address phone_number].each do |attribute|
+        %hr
+        .row
+          .col-3
+            %h6.mb-0= User.human_attribute_name(attribute)
+          .col-9.text-secondary
+            = current_user.public_send(attribute)
+      %hr

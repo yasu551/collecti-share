@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー  #g
+      user_profile: ユーザープロファイル  #g
+      user_profile_version: ユーザープロファイルバージョン  #g
+
+    attributes:
+      user_profile_version: &user_profile_version
+        address: 住所  #g
+        phone_number: 電話番号  #g
+        user_profile: :activerecord.models.user_profile  #g
+
+      user_profile: &user_profile
+        current_user_profile_version: :activerecord.models.current_user_profile_version  #g
+        user: :activerecord.models.user  #g
+        user_profile_versions: ユーザープロファイルバージョン  #g
+        <<: *user_profile_version
+
+
+      user:
+        email: メール  #g
+        google_uid: Google UID  #g
+        name: 名前  #g
+        user_profile: :activerecord.models.user_profile  #g
+        user_profile_versions: ユーザープロファイルバージョン  #g
+        <<: *user_profile
+
