@@ -1,4 +1,4 @@
-class UserProfilesController < ApplicationController
+class User::UserProfilesController < ApplicationController
   before_action :set_user_profile
   before_action :redirect_if_no_user_profile_versions, only: %i[show edit update]
 
