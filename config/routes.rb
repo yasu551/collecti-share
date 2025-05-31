@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/auth/google_oauth2/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
   post "/logout", to: "sessions#destroy", as: :logout
-  
+
   root "home#index"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
