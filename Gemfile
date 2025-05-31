@@ -15,12 +15,19 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 
+gem "haml-rails"
+gem "enumerize"
+gem "simple_form"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
+  gem "haml_lint", require: false
   gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
+  gem "html2haml", require: false
+  gem "i18n_generators", require: false
   gem "web-console"
 end
