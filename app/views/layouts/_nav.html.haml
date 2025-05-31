@@ -1,0 +1,12 @@
+%nav.navbar.navbar-expand-lg.shadow.sticky-top.bg-dark
+  .container-fluid
+    = link_to "CollectiShare", root_path, class: "navbar-brand"
+    %button.navbar-toggler{ type: :button, data: { bs: { toggle: :collapse, target: "#navbar-nav" } }, aria: { controls: "navbar-nav", expanded: false } }
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbar-nav
+      %ul.navbar-nav
+        %li.nav-item
+          - if current_user.present?
+            = button_to 'ログアウト', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-danger'
+          - else
+            = button_to 'ログイン', login_path, method: :post, data: { turbo: false }, class: 'btn btn-info'

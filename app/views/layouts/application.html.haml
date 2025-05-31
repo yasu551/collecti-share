@@ -1,5 +1,5 @@
 !!!
-%html
+%html{ lang: "ja", data: { bs: { theme: :dark } } }
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title= content_for(:title) || "Collecti Share"
@@ -15,4 +15,5 @@
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body
+    = render 'layouts/nav'
     = yield

@@ -1,7 +1,2 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
-
-- if current_user.present?
-  = button_to 'ログアウト', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-primary'
-- else
-  = button_to 'ログイン', login_path, method: :post, data: { turbo: false }, class: 'btn btn-primary'
