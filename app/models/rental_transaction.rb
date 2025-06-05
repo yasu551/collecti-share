@@ -7,4 +7,12 @@ class RentalTransaction < ApplicationRecord
   validates :starts_on, presence: true
   validates :ends_on, presence: true
   validates :borrower_id, uniqueness: { scope: :item_version_id }
+
+  before_validation :set_lender, on: :create
+
+  private
+
+    def set_lender
+      self.lender = item_version.item.user
+    end
 end

@@ -4,11 +4,16 @@ Rails.application.routes.draw do
   get "/auth/failure", to: "sessions#failure"
   post "/logout", to: "sessions#destroy", as: :logout
 
-  resources :items, only: %i[index show]
+  resources :items, only: %i[index show] do
+    scope module: :items do
+      resources :rental_transactions, only: %i[new create]
+    end
+  end
 
   namespace :user do
     resource :user_profile, only: %i[show new create edit update]
     resources :items, only: %i[index show new create edit update]
+    resources :borrower_rental_transactions, only: %i[index show]
   end
 
 

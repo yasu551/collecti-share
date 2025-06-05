@@ -1,0 +1,8 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    %h1.fs-2.text-center.my-4 #{@item.name} をレンタルする
+    = simple_form_for [@item, @rental_transaction] do |f|
+      = f.input :starts_on, html5: true
+      = f.input :ends_on, html5: true
+      = f.submit 'レンタル・リクエストする', class: 'btn btn-primary'
+
