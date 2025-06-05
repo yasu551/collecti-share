@@ -13,6 +13,8 @@
           %li.nav-item
             = link_to "マイアイテム", user_items_path, class: "nav-link"
           %li.nav-item
+            = link_to "借入アイテム", user_borrower_rental_transactions_path, class: "nav-link"
+          %li.nav-item
             = button_to 'ログアウト', logout_path, method: :post, data: { turbo: false }, class: 'btn btn-danger'
         - else
           %li.nav-item

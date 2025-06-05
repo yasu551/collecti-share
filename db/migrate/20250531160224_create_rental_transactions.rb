@@ -9,7 +9,7 @@ class CreateRentalTransactions < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
+
     add_index :rental_transactions, %i[borrower_id item_version_id], unique: true
   end
 end

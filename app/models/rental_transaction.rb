@@ -10,6 +10,12 @@ class RentalTransaction < ApplicationRecord
 
   before_validation :set_lender, on: :create
 
+  scope :lastest, -> { order(created_at: :desc, id: :desc) }
+
+  def price
+    (item_version.daily_price * (ends_on - starts_on + 1)).to_i
+  end
+
   private
 
     def set_lender
