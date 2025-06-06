@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :items, only: %i[index show] do
     scope module: :items do
       resources :rental_transactions, only: %i[new create]
+      resource :conversation, only: %i[show] do
+        scope module: :conversations do
+          resources :messages, only: %i[create]
+        end
+      end
     end
   end
 
