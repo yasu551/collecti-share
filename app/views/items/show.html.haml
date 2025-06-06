@@ -4,11 +4,11 @@
     .hstack
       = link_to "レンタルする", new_item_rental_transaction_url(@item), class: 'btn btn-primary'
     .vstack.gap-3
-      - %i[description condition daily_price availability_status].each do |attribute|
+      - %i[description condition daily_price availability_status user_name].each do |attribute|
         %hr
         .row
           .col-3
             %h6.mb-0= Item.human_attribute_name(attribute)
-          .col-9.text-secondary
+          .col-9
             = @item.public_send(attribute)
       %hr

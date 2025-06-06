@@ -36,12 +36,16 @@ ja:
 
       item:
         <<: *item_version
+        user_name: ユーザー
+        user_bank_account_info: 銀行口座情報
 
       rental_transaction:
         starts_on: 開始日
         ends_on: 終了日
         price: 総価格
         status: 取引ステータス
+        lender_name: 貸し手
+        borrower_name: 借り手
 
   enumerize:
     item_version:

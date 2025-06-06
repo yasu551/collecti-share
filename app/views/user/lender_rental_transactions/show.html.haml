@@ -7,19 +7,29 @@
       - when :requested
         = button_to '貸出リクエストを承認する', user_lender_rental_transaction_approved_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に承認しますか？" }, class: 'btn btn-primary'
+      - when :approved
+        = button_to '入金済み', user_lender_rental_transaction_paid_rental_path(@lender_rental_transaction),
+          data: { turbo_confirm: "本当に入金済みにしますか？" }, class: 'btn btn-primary'
       - if @lender_rental_transaction.status != :rejected
         = button_to '貸出リクエストを拒否する', user_lender_rental_transaction_rejected_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-danger'
     .vstack.gap-3
-      - %i[status starts_on ends_on price].each do |attribute|
+      - %i[borrower_name status starts_on ends_on price].each do |attribute|
         %hr
         .row
           .col-3
             %h6.mb-0= RentalTransaction.human_attribute_name(attribute)
-          .col-9.text-secondary
+          .col-9
             - case attribute
             - when :status
-              = rental_transaction_status_label(rental_transaction: @lender_rental_transaction)
+              .vstack.gap-2
+                %p.mb-0= rental_transaction_status_label(rental_transaction: @lender_rental_transaction)
+                - case @lender_rental_transaction.status
+                - when :approved
+                  %p.mb-0
+                    下記の銀行口座に借り手からの入金があれば、入金済みボタンを教えてください。
+                    %br
+                    = @lender_rental_transaction.borrower.bank_account_info
             - else
               = @lender_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|
@@ -27,6 +37,6 @@
         .row
           .col-3
             %h6.mb-0= ItemVersion.human_attribute_name(attribute)
-          .col-9.text-secondary
+          .col-9
             = item_version.public_send(attribute)
       %hr

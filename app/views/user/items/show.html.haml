@@ -9,7 +9,7 @@
         .row
           .col-3
             %h6.mb-0= Item.human_attribute_name(attribute)
-          .col-9.text-secondary
+          .col-9
             = @item.public_send(attribute)
       %hr
 

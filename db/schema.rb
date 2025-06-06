@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_012034) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_015511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -39,6 +39,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_012034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "paid_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "paid_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_paid_rentals_on_rental_transaction_id"
   end
 
   create_table "rejected_rentals", force: :cascade do |t|
@@ -100,6 +108,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_012034) do
   add_foreign_key "approved_rentals", "rental_transactions"
   add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "paid_rentals", "rental_transactions"
   add_foreign_key "rejected_rentals", "rental_transactions"
   add_foreign_key "rental_transactions", "item_versions"
   add_foreign_key "rental_transactions", "users", column: "borrower_id"
