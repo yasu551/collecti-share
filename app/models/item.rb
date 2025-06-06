@@ -1,8 +1,15 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one :current_item_version, -> { latest }, class_name: "ItemVersion"
+  has_one :conversation, dependent: :restrict_with_exception
   has_many :item_versions, dependent: :restrict_with_exception
   accepts_nested_attributes_for :item_versions, reject_if: :all_blank
+
+  after_create do
+    self.conversation = build_conversation
+    conversation.conversation_participants.build(user:)
+    conversation.save!
+  end
 
   delegate :name, :description, :condition, :daily_price, :availability_status, to: :current_item_version, allow_nil: true
   delegate :name, :bank_account_info, to: :user, prefix: true
