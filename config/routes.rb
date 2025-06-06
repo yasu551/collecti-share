@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         resource :approved_rental, only: %i[create]
         resource :paid_rental, only: %i[create]
         resource :shipped_rental, only: %i[create]
+        resource :completed_rental, only: %i[create]
         resource :review, only: %i[new create]
       end
     end
