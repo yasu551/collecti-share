@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     resource :user_profile, only: %i[show new create edit update]
     resources :items, only: %i[index show new create edit update]
     resources :borrower_rental_transactions, only: %i[index show]
-    resources :lender_rental_transactions, only: %i[index show]
+    resources :lender_rental_transactions, only: %i[index show] do
+      scope module: :lender_rental_transactions do
+        resource :rejected_rental, only: %i[create]
+      end
+    end
   end
 
 

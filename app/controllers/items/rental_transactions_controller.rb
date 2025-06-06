@@ -6,7 +6,7 @@ class Items::RentalTransactionsController < Items::BaseController
   def create
     @rental_transaction = current_user.borrower_rental_transactions.build(rental_transaction_params)
     if @rental_transaction.save
-      redirect_to user_borrower_rental_transaction_url(@rental_transaction), notice: "レンタル・リクエストしました"
+      redirect_to user_borrower_rental_transaction_url(@rental_transaction), notice: "貸出リクエストしました"
     else
       render :new, status: :unprocessable_content
     end

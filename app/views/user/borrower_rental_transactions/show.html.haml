@@ -9,7 +9,11 @@
           .col-3
             %h6.mb-0= RentalTransaction.human_attribute_name(attribute)
           .col-9.text-secondary
-            = @borrower_rental_transaction.public_send(attribute)
+            - case attribute
+            - when :status
+              = rental_transaction_status_label(rental_transaction: @borrower_rental_transaction)
+            - else
+              = @borrower_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|
         %hr
         .row
