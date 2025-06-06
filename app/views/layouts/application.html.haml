@@ -14,9 +14,11 @@
     %link{href: "/icon.png", rel: "apple-touch-icon"}/
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    = debugbar_head if defined? Debugbar
   %body
     = render "layouts/flash"
     = render 'layouts/nav'
     = yield
     - if Rails.env.local?
       = render "layouts/rails-template-inspector"
+    = debugbar_body cable: { url: "wss://localhost:3000/_debugbar/cable" } if defined? Debugbar

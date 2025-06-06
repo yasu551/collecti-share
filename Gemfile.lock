@@ -93,6 +93,9 @@ GEM
     debug (1.10.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    debugbar (0.4.3)
+      actioncable
+      rails
     dotenv (3.1.8)
     drb (2.2.3)
     ed25519 (1.4.0)
@@ -417,6 +420,7 @@ DEPENDENCIES
   brakeman
   cssbundling-rails
   debug
+  debugbar
   enumerize
   haml-rails
   haml_lint

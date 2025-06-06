@@ -32,4 +32,5 @@ group :development do
   gem "html2haml", require: false
   gem "i18n_generators", require: false
   gem "web-console"
+  gem "debugbar"
 end
