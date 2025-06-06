@@ -30,6 +30,9 @@
                     下記の銀行口座に借り手からの入金があれば、入金済みボタンを教えてください。
                     %br
                     = @lender_rental_transaction.borrower.bank_account_info
+                - when :paid
+                  %p.mb-0下記のQRコードを梱包資材に貼り付けて、配送してください。
+                  = qrcode_tag(@lender_rental_transaction.borrower_qr_code.payload.to_s, module_size: 3)
             - else
               = @lender_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|

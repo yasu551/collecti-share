@@ -19,6 +19,7 @@ gem "haml-rails"
 gem "enumerize"
 gem "simple_form"
 gem "omniauth-google-oauth2"
+gem "rqrcode"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
