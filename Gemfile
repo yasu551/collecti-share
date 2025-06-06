@@ -22,7 +22,7 @@ gem "omniauth-google-oauth2"
 gem "rqrcode"
 gem 'kaminari'
 
-gem "rack-mini-profiler", require: false
+gem "rack-mini-profiler"
 gem "memory_profiler"
 gem "flamegraph"
 gem "stackprof"
