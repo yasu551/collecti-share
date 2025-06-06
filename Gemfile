@@ -21,6 +21,12 @@ gem "simple_form"
 gem "omniauth-google-oauth2"
 gem "rqrcode"
 
+gem "rack-mini-profiler", require: false
+gem "memory_profiler"
+gem "flamegraph"
+gem "stackprof"
+gem "rails_performance"
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
