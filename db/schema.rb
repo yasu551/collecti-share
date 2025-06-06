@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_015511) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_032630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_015511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rental_transaction_id"], name: "index_paid_rentals_on_rental_transaction_id"
+  end
+
+  create_table "qr_codes", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.bigint "user_id", null: false
+    t.jsonb "payload", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_qr_codes_on_rental_transaction_id"
+    t.index ["user_id"], name: "index_qr_codes_on_user_id"
   end
 
   create_table "rejected_rentals", force: :cascade do |t|
@@ -109,6 +119,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_015511) do
   add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
   add_foreign_key "paid_rentals", "rental_transactions"
+  add_foreign_key "qr_codes", "rental_transactions"
+  add_foreign_key "qr_codes", "users"
   add_foreign_key "rejected_rentals", "rental_transactions"
   add_foreign_key "rental_transactions", "item_versions"
   add_foreign_key "rental_transactions", "users", column: "borrower_id"

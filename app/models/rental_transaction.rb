@@ -6,6 +6,7 @@ class RentalTransaction < ApplicationRecord
   has_one :rejected_rental, dependent: :restrict_with_exception
   has_one :approved_rental, dependent: :restrict_with_exception
   has_one :paid_rental, dependent: :restrict_with_exception
+  has_many :qr_codes, dependent: :restrict_with_exception
 
   validates :starts_on, presence: true
   validates :ends_on, presence: true
@@ -35,6 +36,13 @@ class RentalTransaction < ApplicationRecord
 
   def price
     (item_version.daily_price * (ends_on - starts_on + 1)).to_i
+  end
+
+  def create_qr_codes!
+    transaction do
+      qr_codes.create!(user_id: lender.id)
+      qr_codes.create!(user_id: borrower.id)
+    end
   end
 
   private
