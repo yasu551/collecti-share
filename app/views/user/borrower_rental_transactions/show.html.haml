@@ -19,6 +19,9 @@
                     下記の銀行口座に振り込んでください。
                     %br
                     = @borrower_rental_transaction.lender.bank_account_info
+                - when :shipped
+                  %p.mb-0 下記のQRコードを梱包資材に貼り付けて、返却してください。
+                  = qrcode_tag(@borrower_rental_transaction.lender_qr_code.payload.to_s, module_size: 3)
             - else
               = @borrower_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|

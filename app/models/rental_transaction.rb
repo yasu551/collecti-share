@@ -58,6 +58,10 @@ class RentalTransaction < ApplicationRecord
     qr_codes.find_by(user_id: borrower.id)
   end
 
+  def lender_qr_code
+    qr_codes.find_by(user_id: lender.id)
+  end
+
   private
 
     def set_lender
