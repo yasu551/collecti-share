@@ -40,6 +40,7 @@ ja:
         starts_on: 開始日
         ends_on: 終了日
         price: 総価格
+        status: 取引ステータス
 
   enumerize:
     item_version:

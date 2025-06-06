@@ -3,6 +3,13 @@
     - item_version = @borrower_rental_transaction.item_version
     %h1.fs-2.text-center.my-4 #{item_version.name}の借入
     .vstack.gap-3
+      - %i[status starts_on ends_on price].each do |attribute|
+        %hr
+        .row
+          .col-3
+            %h6.mb-0= RentalTransaction.human_attribute_name(attribute)
+          .col-9.text-secondary
+            = @borrower_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|
         %hr
         .row
@@ -10,17 +17,4 @@
             %h6.mb-0= ItemVersion.human_attribute_name(attribute)
           .col-9.text-secondary
             = item_version.public_send(attribute)
-      - %i[starts_on ends_on].each do |attribute|
-        %hr
-        .row
-          .col-3
-            %h6.mb-0= RentalTransaction.human_attribute_name(attribute)
-          .col-9.text-secondary
-            = @borrower_rental_transaction.public_send(attribute)
-      %hr
-        .row
-          .col-3
-            %h6.mb-0= RentalTransaction.human_attribute_name(:price)
-          .col-9.text-secondary
-            = number_to_currency(@borrower_rental_transaction.price)
       %hr

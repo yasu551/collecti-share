@@ -9,8 +9,17 @@ class RentalTransaction < ApplicationRecord
   validates :borrower_id, uniqueness: { scope: :item_version_id }
 
   before_validation :set_lender, on: :create
+  before_validation :build_requested_rental, on: :create
 
   scope :lastest, -> { order(created_at: :desc, id: :desc) }
+
+  def status
+    if requested_rental.present?
+      :requested
+    else
+      :unknown
+    end
+  end
 
   def price
     (item_version.daily_price * (ends_on - starts_on + 1)).to_i
