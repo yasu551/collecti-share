@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_032630) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -88,6 +88,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_032630) do
     t.index ["rental_transaction_id"], name: "index_requested_rentals_on_rental_transaction_id", unique: true
   end
 
+  create_table "shipped_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "shipped_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_shipped_rentals_on_rental_transaction_id"
+  end
+
   create_table "user_profile_versions", force: :cascade do |t|
     t.bigint "user_profile_id", null: false
     t.string "address", null: false
@@ -126,6 +134,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_032630) do
   add_foreign_key "rental_transactions", "users", column: "borrower_id"
   add_foreign_key "rental_transactions", "users", column: "lender_id"
   add_foreign_key "requested_rentals", "rental_transactions"
+  add_foreign_key "shipped_rentals", "rental_transactions"
   add_foreign_key "user_profile_versions", "user_profiles"
   add_foreign_key "user_profiles", "users"
 end

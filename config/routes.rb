@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         resource :rejected_rental, only: %i[create]
         resource :approved_rental, only: %i[create]
         resource :paid_rental, only: %i[create]
+        resource :shipped_rental, only: %i[create]
       end
     end
   end

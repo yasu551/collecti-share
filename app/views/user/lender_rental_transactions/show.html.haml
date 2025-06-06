@@ -10,6 +10,9 @@
       - when :approved
         = button_to '入金済み', user_lender_rental_transaction_paid_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に入金済みにしますか？" }, class: 'btn btn-primary'
+      - when :paid
+        = button_to '配送済み', user_lender_rental_transaction_shipped_rental_path(@lender_rental_transaction),
+          data: { turbo_confirm: "本当に配送済みにしますか？" }, class: 'btn btn-primary'
       - if @lender_rental_transaction.status != :rejected
         = button_to '貸出リクエストを拒否する', user_lender_rental_transaction_rejected_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-danger'
