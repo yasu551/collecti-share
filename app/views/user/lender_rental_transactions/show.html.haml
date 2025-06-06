@@ -1,0 +1,20 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    - item_version = @lender_rental_transaction.item_version
+    %h1.fs-2.text-center.my-4 #{item_version.name}の貸出
+    .vstack.gap-3
+      - %i[status starts_on ends_on price].each do |attribute|
+        %hr
+        .row
+          .col-3
+            %h6.mb-0= RentalTransaction.human_attribute_name(attribute)
+          .col-9.text-secondary
+            = @lender_rental_transaction.public_send(attribute)
+      - %i[description condition daily_price].each do |attribute|
+        %hr
+        .row
+          .col-3
+            %h6.mb-0= ItemVersion.human_attribute_name(attribute)
+          .col-9.text-secondary
+            = item_version.public_send(attribute)
+      %hr

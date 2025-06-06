@@ -1,0 +1,7 @@
+.row.justify-content-center.align-items-center
+  .col-md-8.col-11
+    %h1.fs-2.text-center.my-4 貸出アイテム一覧
+    %ul.list-group
+      - @lender_rental_transactions.each do |lender_rental_transaction|
+        %li.list-group-item
+          = link_to lender_rental_transaction.item_version.name, user_lender_rental_transaction_path(lender_rental_transaction)

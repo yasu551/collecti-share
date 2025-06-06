@@ -11,7 +11,7 @@ class RentalTransaction < ApplicationRecord
   before_validation :set_lender, on: :create
   before_validation :build_requested_rental, on: :create
 
-  scope :lastest, -> { order(created_at: :desc, id: :desc) }
+  scope :latest, -> { order(created_at: :desc, id: :desc) }
 
   def status
     if requested_rental.present?
