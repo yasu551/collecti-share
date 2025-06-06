@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :lender_rental_transactions, only: %i[index show] do
       scope module: :lender_rental_transactions do
         resource :rejected_rental, only: %i[create]
+        resource :approved_rental, only: %i[create]
       end
     end
   end

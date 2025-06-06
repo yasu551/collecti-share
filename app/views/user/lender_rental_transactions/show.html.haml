@@ -2,7 +2,11 @@
   .col-md-8.col-11
     - item_version = @lender_rental_transaction.item_version
     %h1.fs-2.text-center.my-4 #{item_version.name}の貸出
-    .d-flex
+    .d-flex.justify-content-between.align-items-center
+      - case @lender_rental_transaction.status
+      - when :requested
+        = button_to '貸出リクエストを承認する', user_lender_rental_transaction_approved_rental_path(@lender_rental_transaction),
+          data: { turbo_confirm: "本当に承認しますか？" }, class: 'btn btn-primary'
       - if @lender_rental_transaction.status != :rejected
         = button_to '貸出リクエストを拒否する', user_lender_rental_transaction_rejected_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-danger'

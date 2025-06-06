@@ -4,6 +4,7 @@ class RentalTransaction < ApplicationRecord
   belongs_to :item_version
   has_one :requested_rental, dependent: :restrict_with_exception
   has_one :rejected_rental, dependent: :restrict_with_exception
+  has_one :approved_rental, dependent: :restrict_with_exception
 
   validates :starts_on, presence: true
   validates :ends_on, presence: true
@@ -17,6 +18,8 @@ class RentalTransaction < ApplicationRecord
   def status
     if rejected_rental.present?
       :rejected
+    elsif approved_rental.present?
+      :approved
     elsif requested_rental.present?
       :requested
     else

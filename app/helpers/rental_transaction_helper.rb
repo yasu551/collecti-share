@@ -3,6 +3,7 @@ module RentalTransactionHelper
     case rental_transaction.status
     when :requested then "リクエスト中"
     when :rejected then "拒否済み"
+    when :approved then "承認済み"
     when :unknown then "不明"
     else
       raise ArgumentError, "Invalid status: #{status}"

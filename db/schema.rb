@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_002934) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_005634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "approved_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "approved_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_approved_rentals_on_rental_transaction_id"
+  end
 
   create_table "item_versions", force: :cascade do |t|
     t.bigint "item_id", null: false
@@ -88,6 +96,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_002934) do
     t.index ["google_uid"], name: "index_users_on_google_uid", unique: true
   end
 
+  add_foreign_key "approved_rentals", "rental_transactions"
   add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
   add_foreign_key "rejected_rentals", "rental_transactions"
