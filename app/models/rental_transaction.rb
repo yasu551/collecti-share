@@ -10,6 +10,7 @@ class RentalTransaction < ApplicationRecord
   has_one :returned_rental, dependent: :restrict_with_exception
   has_one :completed_rental, dependent: :restrict_with_exception
   has_many :qr_codes, dependent: :restrict_with_exception
+  has_many :reviews, dependent: :restrict_with_exception
 
   validates :starts_on, presence: true
   validates :ends_on, presence: true
@@ -60,6 +61,10 @@ class RentalTransaction < ApplicationRecord
 
   def lender_qr_code
     qr_codes.find_by(user_id: lender.id)
+  end
+
+  def borrower_review
+    reviews.find_by(user_id: borrower.id)
   end
 
   private

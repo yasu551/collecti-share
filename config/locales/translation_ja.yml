@@ -47,6 +47,10 @@ ja:
         lender_name: 貸し手
         borrower_name: 借り手
 
+      review:
+        rating: 評価
+        comment: コメント
+
   enumerize:
     item_version:
       condition:
