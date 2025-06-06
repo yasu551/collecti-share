@@ -67,6 +67,10 @@ class RentalTransaction < ApplicationRecord
     reviews.find_by(user_id: borrower.id)
   end
 
+  def lender_review
+    reviews.find_by(user_id: lender.id)
+  end
+
   private
 
     def set_lender

@@ -15,6 +15,9 @@
       - when :paid
         = button_to '配送済み', user_lender_rental_transaction_shipped_rental_path(@lender_rental_transaction),
           data: { turbo_confirm: "本当に配送済みにしますか？" }, class: 'btn btn-primary'
+      - when :returned
+        - if @lender_rental_transaction.lender_review.blank?
+          = link_to 'レビューを書く', new_user_lender_rental_transaction_review_path(@lender_rental_transaction), class: 'btn btn-primary'
     .vstack.gap-3
       - %i[borrower_name status starts_on ends_on price].each do |attribute|
         %hr
@@ -44,4 +47,17 @@
             %h6.mb-0= ItemVersion.human_attribute_name(attribute)
           .col-9
             = item_version.public_send(attribute)
+      - if @lender_rental_transaction.lender_review.present?
+        %hr
+        .row
+          .col-3
+            %h6.mb-0 レビュー評価
+          .col-9
+            = @lender_rental_transaction.lender_review.rating
+        %hr
+        .row
+          .col-3
+            %h6.mb-0 レビューコメント
+          .col-9
+            = @lender_rental_transaction.lender_review.comment
       %hr
