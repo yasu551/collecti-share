@@ -43,7 +43,7 @@ class User::ItemsController < ApplicationController
     end
 
     def new_item_params
-      params.expect(item: { item_versions_attributes: [ %i[name description condition daily_price availability_status] ] })
+      params.expect(item: { item_tag_ids: [], item_versions_attributes: [ %i[name description condition daily_price availability_status] ] })
     end
 
     def edit_item_params

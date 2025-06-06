@@ -9,5 +9,6 @@
           = ff.input :condition
           = ff.input :daily_price
           = ff.input :availability_status
+        = f.input :item_tag_ids, as: :select, collection: ItemTag.latest, input_html: { multiple: true }, label_method: :name, value_method: :id
         = f.submit class: 'btn btn-primary'
     = link_to '戻る', user_items_path, class: 'btn btn-secondary'

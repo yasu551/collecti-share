@@ -38,6 +38,7 @@ ja:
         <<: *item_version
         user_name: ユーザー
         user_bank_account_info: 銀行口座情報
+        item_tags: タグ
 
       rental_transaction:
         starts_on: 開始日

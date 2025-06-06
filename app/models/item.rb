@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   has_one :conversation, dependent: :restrict_with_exception
   has_many :item_versions, dependent: :restrict_with_exception
   accepts_nested_attributes_for :item_versions, reject_if: :all_blank
+  has_many :item_taggings, dependent: :destroy
+  has_many :item_tags, through: :item_taggings
 
   after_create do
     self.conversation = build_conversation
