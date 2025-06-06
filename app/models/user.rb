@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :google_uid, presence: true, uniqueness: true
 
-  delegate :address, :phone_number, to: :user_profile, allow_nil: true
+  delegate :address, :phone_number, :bank_account_info, to: :user_profile, allow_nil: true
 
   class << self
     def find_or_create_from_auth_hash(auth_hash)

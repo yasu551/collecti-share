@@ -11,6 +11,7 @@ ja:
         address: 住所  #g
         phone_number: 電話番号  #g
         user_profile: :activerecord.models.user_profile  #g
+        bank_account_info: 銀行口座情報
 
       user_profile: &user_profile
         current_user_profile_version: :activerecord.models.current_user_profile_version  #g

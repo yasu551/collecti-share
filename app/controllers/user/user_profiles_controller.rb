@@ -12,20 +12,20 @@ class User::UserProfilesController < ApplicationController
   def create
     @user_profile_version = @user_profile.user_profile_versions.build(user_profile_version_params)
     if @user_profile_version.save
-      redirect_to user_profile_path, notice: "ユーザープロフィールを作成しました"
+      redirect_to user_user_profile_path, notice: "ユーザープロフィールを作成しました"
     else
       render :new, status: :unprocessable_content
     end
   end
 
   def edit
-    @user_profile_version = @user_profile.user_profile_versions.build(address: @user_profile.address, phone_number: @user_profile.phone_number)
+    @user_profile_version = @user_profile.build_user_profile_version_from_current_version
   end
 
   def update
     @user_profile_version = @user_profile.user_profile_versions.build(user_profile_version_params)
     if @user_profile_version.save
-      redirect_to user_profile_path, notice: "ユーザープロフィールを更新しました"
+      redirect_to user_user_profile_path, notice: "ユーザープロフィールを更新しました"
     else
       render :edit, status: :unprocessable_content
     end
@@ -38,7 +38,7 @@ class User::UserProfilesController < ApplicationController
     end
 
     def user_profile_version_params
-      params.expect(user_profile_version: %i[address phone_number])
+      params.expect(user_profile_version: %i[address phone_number bank_account_info])
     end
 
     def redirect_if_no_user_profile_versions

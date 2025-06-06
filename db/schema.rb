@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_005634) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_012034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -76,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_005634) do
     t.string "phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "bank_account_info", default: "", null: false
     t.index ["user_profile_id"], name: "index_user_profile_versions_on_user_profile_id"
   end
 

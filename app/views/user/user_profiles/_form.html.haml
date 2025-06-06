@@ -1,4 +1,9 @@
-= simple_form_for user_profile_version, url: user_user_profile_path do |f|
+:ruby
+  user_profile ||= nil
+  url = user_profile.present? ? user_user_profile_path(user_profile) : user_user_profile_path
+  method = user_profile.present? ? :patch : :post
+= simple_form_for user_profile_version, url:, method: do |f|
   = f.input :address
   = f.input :phone_number
+  = f.input :bank_account_info
   = f.submit class: 'btn btn-primary'
