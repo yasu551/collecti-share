@@ -20,6 +20,7 @@ gem "enumerize"
 gem "simple_form"
 gem "omniauth-google-oauth2"
 gem "rqrcode"
+gem 'kaminari'
 
 gem "rack-mini-profiler", require: false
 gem "memory_profiler"

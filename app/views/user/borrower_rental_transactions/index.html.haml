@@ -5,3 +5,5 @@
       - @borrower_rental_transactions.each do |borrower_rental_transaction|
         %li.list-group-item
           = link_to borrower_rental_transaction.item_version.name, user_borrower_rental_transaction_path(borrower_rental_transaction)
+    .mt-2
+      = paginate @borrower_rental_transactions

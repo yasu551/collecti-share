@@ -5,3 +5,5 @@
       - @lender_rental_transactions.each do |lender_rental_transaction|
         %li.list-group-item
           = link_to lender_rental_transaction.item_version.name, user_lender_rental_transaction_path(lender_rental_transaction)
+    .mt-2
+      = paginate @lender_rental_transactions

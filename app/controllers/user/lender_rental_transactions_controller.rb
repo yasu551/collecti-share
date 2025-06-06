@@ -2,7 +2,7 @@ class User::LenderRentalTransactionsController < ApplicationController
   before_action :set_lender_rental_transaction, only: %i[show]
 
   def index
-    @lender_rental_transactions = current_user.lender_rental_transactions.latest
+    @lender_rental_transactions = current_user.lender_rental_transactions.latest.page(params[:page])
   end
 
   def show

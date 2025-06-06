@@ -2,7 +2,7 @@ class User::ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit]
 
   def index
-    @items = current_user.items.latest
+    @items = current_user.items.latest.page(params[:page])
   end
 
   def show

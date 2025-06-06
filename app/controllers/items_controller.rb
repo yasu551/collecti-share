@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all.available.partial_match(params[:keyword]).latest
+    @items = Item.all.available.partial_match(params[:keyword]).latest.page(params[:page])
   end
 
   def show

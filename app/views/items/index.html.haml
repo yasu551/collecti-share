@@ -9,3 +9,5 @@
       - @items.each do |item|
         %li.list-group-item
           = link_to item.name, item_path(item)
+    .mt-2
+      = paginate @items
