@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_042610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,45 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rental_transaction_id"], name: "index_approved_rentals_on_rental_transaction_id"
+  end
+
+  create_table "completed_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "completed_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_completed_rentals_on_rental_transaction_id"
+  end
+
+  create_table "conversation_participants", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_conversation_participants_on_conversation_id"
+    t.index ["user_id"], name: "index_conversation_participants_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_conversations_on_item_id"
+  end
+
+  create_table "item_taggings", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "item_tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_taggings_on_item_id"
+    t.index ["item_tag_id"], name: "index_item_taggings_on_item_tag_id"
+  end
+
+  create_table "item_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "item_versions", force: :cascade do |t|
@@ -39,6 +78,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "paid_rentals", force: :cascade do |t|
@@ -88,6 +137,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
     t.index ["rental_transaction_id"], name: "index_requested_rentals_on_rental_transaction_id", unique: true
   end
 
+  create_table "returned_rentals", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.datetime "returned_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_returned_rentals_on_rental_transaction_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "rental_transaction_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "rating", null: false
+    t.text "comment", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_transaction_id"], name: "index_reviews_on_rental_transaction_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "shipped_rentals", force: :cascade do |t|
     t.bigint "rental_transaction_id", null: false
     t.datetime "shipped_at", null: false
@@ -124,8 +192,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
   end
 
   add_foreign_key "approved_rentals", "rental_transactions"
+  add_foreign_key "completed_rentals", "rental_transactions"
+  add_foreign_key "conversation_participants", "conversations"
+  add_foreign_key "conversation_participants", "users"
+  add_foreign_key "conversations", "items"
+  add_foreign_key "item_taggings", "item_tags"
+  add_foreign_key "item_taggings", "items"
   add_foreign_key "item_versions", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "paid_rentals", "rental_transactions"
   add_foreign_key "qr_codes", "rental_transactions"
   add_foreign_key "qr_codes", "users"
@@ -134,6 +210,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_041131) do
   add_foreign_key "rental_transactions", "users", column: "borrower_id"
   add_foreign_key "rental_transactions", "users", column: "lender_id"
   add_foreign_key "requested_rentals", "rental_transactions"
+  add_foreign_key "returned_rentals", "rental_transactions"
+  add_foreign_key "reviews", "rental_transactions"
+  add_foreign_key "reviews", "users"
   add_foreign_key "shipped_rentals", "rental_transactions"
   add_foreign_key "user_profile_versions", "user_profiles"
   add_foreign_key "user_profiles", "users"

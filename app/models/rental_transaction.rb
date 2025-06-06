@@ -7,6 +7,8 @@ class RentalTransaction < ApplicationRecord
   has_one :approved_rental, dependent: :restrict_with_exception
   has_one :paid_rental, dependent: :restrict_with_exception
   has_one :shipped_rental, dependent: :restrict_with_exception
+  has_one :returned_rental, dependent: :restrict_with_exception
+  has_one :completed_rental, dependent: :restrict_with_exception
   has_many :qr_codes, dependent: :restrict_with_exception
 
   validates :starts_on, presence: true
@@ -24,6 +26,10 @@ class RentalTransaction < ApplicationRecord
   def status
     if rejected_rental.present?
       :rejected
+    elsif completed_rental.present?
+      :completed
+    elsif returned_rental.present?
+      :returned
     elsif shipped_rental.present?
       :shipped
     elsif paid_rental.present?
