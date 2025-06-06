@@ -5,6 +5,9 @@
     .hstack.gap-1
       - if %i[shipped returned completed].include?(@borrower_rental_transaction.status) && @borrower_rental_transaction.borrower_review.blank?
         = link_to 'レビューを書く', new_user_borrower_rental_transaction_review_path(@borrower_rental_transaction), class: 'btn btn-primary'
+      - if @borrower_rental_transaction.status == :shipped
+        = button_to '返却済み', user_borrower_rental_transaction_returned_rental_path(@borrower_rental_transaction),
+          data: { turbo_confirm: "本当に返却済みにしますか？" }, class: 'btn btn-primary'
     .vstack.gap-3
       - %i[lender_name status starts_on ends_on price].each do |attribute|
         %hr
