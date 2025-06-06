@@ -11,7 +11,13 @@
           .col-9.text-secondary
             - case attribute
             - when :status
-              = rental_transaction_status_label(rental_transaction: @borrower_rental_transaction)
+              %p= rental_transaction_status_label(rental_transaction: @borrower_rental_transaction)
+              - case @borrower_rental_transaction.status
+              - when :approved
+                %p.mb-0
+                  下記の銀行口座に振り込んでください。
+                  %br
+                  = @borrower_rental_transaction.lender.bank_account_info
             - else
               = @borrower_rental_transaction.public_send(attribute)
       - %i[description condition daily_price].each do |attribute|
